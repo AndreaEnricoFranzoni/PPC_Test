@@ -1,4 +1,4 @@
-#Testing PPC_KO algorithm
+# Testing PPC_KO algorithm
 
 Compiling:
 ~~~
