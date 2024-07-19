@@ -1,3 +1,5 @@
+#Testing PPC_KO algorithm
+
 Compiling:
 ~~~
 make
@@ -12,5 +14,5 @@ Cleaning from object files and executables:
 ~~~
 make distclean
 ~~~
-
-# CHange PACS_ROOT in the MAKEFILE
+ 
+Change PACS_ROOT in the MAKEFILE to yours
