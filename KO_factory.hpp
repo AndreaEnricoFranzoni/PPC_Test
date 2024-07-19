@@ -21,6 +21,7 @@ std::unique_ptr<T> make_unique(Args&&... args)
 }
 
 
+//questa factory funziona
 template<KO_Type KO_T, class... Args> 
 std::unique_ptr<PPC::PPC_KO_base> 
 PPCfactory(Args &&... args)
@@ -37,16 +38,36 @@ PPCfactory(Args &&... args)
 };
 
 
+bool
+inline string_id(const std::string & s)
+{
+  if(s=="NoCV")
+  {
+    return true;
+  }
+  if (s=="CV")
+  {
+    return false;
+  }
+  else
+  {
+    std::string error_message = "Wrong input string";
+    throw std::invalid_argument(error_message);
+  }
+  
+};
 
+
+//purtoppo questa cosa non funziona perchè non sono due constexpr
 template<class... Args>
 std::unique_ptr<PPC::PPC_KO_base> 
 KO_Solver(const std::string &id, Args &&... args)
 {
-  if constexpr(id=="NoCV")
+  if (id=="NoCV")
   {
     return PPCfactory<KO_Type::NoCV>(std::forward<Args>(args)...);
   }
-  if constexpr(id=="CV")
+  if (id=="CV")
   {
     return PPCfactory<KO_Type::CV>(std::forward<Args>(args)...);
   }
@@ -103,7 +124,6 @@ PPCfactory(Args &&... args)
   }
 };
 
-
 #endif 
 */
 
@@ -123,7 +143,8 @@ PPCfactory(Args &&... args)
 
 
 
-//VERSIONE STRA-VECCHIA
+//VERSIONE STRA-VECCHIA: NON VA BENE PERCHE' IN QUESTO CASO, PER FUNZIONARE, I COSTRUTTORI DELLE CLASSI FIGLIE
+//DEVONO PRENDERE GLI STESSI PARAMETRI
 /*
 #ifndef KO_FACTORY_HPP
 #define KO_FACTORY_HPP
@@ -139,7 +160,6 @@ std::unique_ptr<T> make_unique(Args&&... args)
 {
     return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
 }
-
 
 
 //! A Factory class: A class for the choice of the cross-validation method to use for the regularization parameter alpha
@@ -166,7 +186,6 @@ class KO_Factory
     }
   }
 };
-
 
 #endif 
 */
